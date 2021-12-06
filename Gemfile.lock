@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ffi (1.15.4)
+    systemd-journal (1.4.2)
+      ffi (~> 1.9)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  systemd-journal (~> 1.4)
+
+BUNDLED WITH
+   2.2.22
