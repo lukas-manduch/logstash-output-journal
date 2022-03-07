@@ -10,7 +10,7 @@ def save_log(message, priority, extra={})
     :message => message,
     :priority => priority,
   }
-  
+
   final_message = extra.merge message
   Systemd::Journal.message final_message
 end
@@ -33,13 +33,13 @@ class LogStash::Outputs::Journal < LogStash::Outputs::Base
     journal = event.get("[journal]")
     journal ||= {}
     unless journal.is_a? Hash
-      @logger.warn("[journal] must be hash, or empty") 
+      @logger.warn("[journal] must be hash, or empty")
       journal = {}
     end
 
     # If priorty is not ok, log error and set it to 3 = syslog error
-    priority = Integer @priority rescue 
-    begin 
+    priority = Integer event.sprintf(@priority) rescue
+    begin
       @logger.warn "Wrong format of priority, expected number, got #{@priority} "
       3 # Value of error log in journal
     end
